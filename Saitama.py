@@ -2,22 +2,61 @@
 
 import sublime
 import sublime_plugin
-from . import Theme
-# test
-# import Theme
+import functools
+
+NO_SELECTION = -1
+PREFERENCES = 'Preferences.sublime-settings'
 
 
-class SetThemeCommand(sublime_plugin.WindowCommand):
-    def run(self):
-        print("setTheme")
-        self.color_scheme = Theme.get_color_scheme()
-        self.theme = Theme.get_theme()
-        print("before color cheme = " + self.color_scheme)
-        print("before theme = " + self.theme)
-        Theme.activate_color_scheme('Packages/Saitama/themes/default/Saitama.sublime-color-scheme')
-        Theme.activate_theme('Saitama.sublime-theme')
-        print("after color cheme = " + Theme.get_color_scheme())
-        print("after theme = " + Theme.get_theme())
-        
+def get_color_scheme():
+  return sublime.load_settings(PREFERENCES).get('color_scheme', '')
 
 
+def set_color_scheme(path):
+  return sublime.load_settings(PREFERENCES).set('color_scheme', path)
+
+
+def preview_color_scheme(path):
+  set_color_scheme(path)
+
+
+def activate_color_scheme(path):
+  set_color_scheme(path)
+  commit()
+
+
+def revert_color_scheme(path):
+  set_color_scheme(path)
+
+
+def get_ui_theme():
+  return sublime.load_settings(PREFERENCES).get('theme', '')
+
+
+def set_ui_theme(path):
+  return sublime.load_settings(PREFERENCES).set('theme', path)
+
+
+def preview_ui_theme(path):
+  set_ui_theme(path)
+
+
+def activate_ui_theme(path):
+  set_ui_theme(path)
+  commit()
+
+
+def revert_ui_theme(path):
+  set_ui_theme(path)
+
+
+def commit():
+  return sublime.save_settings(PREFERENCES)
+
+
+class SaitamaActivateCommand(sublime_plugin.WindowCommand):
+
+  def run(self):
+    print("active saitama ui theme")
+    activate_color_scheme('Saitama.sublime-color-scheme')
+    activate_ui_theme('Saitama.sublime-theme')

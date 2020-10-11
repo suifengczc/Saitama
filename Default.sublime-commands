@@ -1,6 +1,6 @@
 [
   {
-    "caption": "Saitama: use default theme",
-    "command": "set_theme"
+    "caption": "saitama: Activate theme",
+    "command": "saitama_activate"
   }
 ]
