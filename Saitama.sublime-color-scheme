@@ -15,6 +15,7 @@
 		"dYellow" : "#FFC66D",
 		"orange"  : "#FFA352",
 		"lBlue"   : "#61daf2",
+		"dBlue"   : "#6897bb",
 		"rOrange" : "#FF5242",
 		"lOrange" : "#FFD9B2",
 		"dOrange" : "#8A653B",
@@ -122,7 +123,7 @@
 
 		{
 			"scope": "constant.numeric, support.constant",
-			"foreground": "var(constant)"
+			"foreground": "var(dBlue)"
 		},
 		{
 			"scope": "constant.language",
